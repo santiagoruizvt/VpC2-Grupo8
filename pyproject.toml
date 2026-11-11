@@ -1,0 +1,30 @@
+[project]
+name = "vpc2-grupo8"
+version = "0.1.0"
+description = "Detección de espacios libres en estacionamientos (PKLot) - TP Visión por Computadora 2, CEIA"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+    "pillow>=10.0",
+    "opencv-python>=4.9",
+    "tqdm>=4.66",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29",
+    "jupyterlab>=4.2",
+    "nbclient>=0.10",
+    "nbformat>=5.10",
+]
+
+# Las dependencias de deep learning (torch, torchvision, ultralytics, ...) se agregan
+# en la etapa de modelado. Para GPU en Windows conviene declarar el índice de PyTorch
+# con CUDA vía [tool.uv.sources] / [[tool.uv.index]].
+
+[tool.uv]
+package = false

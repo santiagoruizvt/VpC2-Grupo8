@@ -1,0 +1,29 @@
+# Dataset (se descarga aparte, ver README)
+archive
+archive.zip
+data/
+
+# Entorno
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Artefactos de entrenamiento / inferencia
+runs/
+outputs/
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# Videos
+*.mp4
+*.avi
+*.mov
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
