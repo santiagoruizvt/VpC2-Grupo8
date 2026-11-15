@@ -2,6 +2,7 @@
 archive
 archive.zip
 data/
+datasets/
 
 # Entorno
 .venv/
