@@ -2,6 +2,7 @@
 archive
 archive.zip
 data/
+datasets/
 
 # Entorno
 .venv/
@@ -16,6 +17,7 @@ outputs/
 *.pth
 *.onnx
 *.engine
+*.zip
 
 # Videos
 *.mp4
