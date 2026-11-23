@@ -17,6 +17,7 @@ outputs/
 *.pth
 *.onnx
 *.engine
+*.zip
 
 # Videos
 *.mp4
