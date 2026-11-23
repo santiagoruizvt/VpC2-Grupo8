@@ -137,12 +137,13 @@ Para comparar modelos o estrategias entre sí conviene **no cambiar** `EPOCHS`, 
 - Sólo un subconjunto de las plazas visibles está anotado → habrá que definir una ROI en la demo.
 - Fuerte *leakage* temporal entre splits (frames a ~5 min de distancia) → evaluar también con split por día / por cámara.
 
-Estado y próximos pasos
-[x] EDA (01)
-[x] Preparación de datos y estrategias de split (02)
-[x] Baseline YOLO11m con por_dia (03)
-[ ] YOLO11m con oficial y con por_camara_*
-[ ] Segunda arquitectura (RT-DETR o Faster R-CNN) con la misma configuración
-[ ] Comparativa de métricas y tiempos de inferencia
-[ ] Porcentaje de ocupación por frame y definición de la ROI para la demo
-[ ] Demo sobre video con tracking
+## Estado y próximos pasos
+
+- [x] EDA (01)
+- [x] Preparación de datos y estrategias de split (02)
+- [x] Baseline YOLO11m con `por_dia` (03)
+- [ ] YOLO11m con `oficial` y con `por_camara_*`
+- [ ] Segunda arquitectura (RT-DETR o Faster R-CNN) con la misma configuración
+- [ ] Comparativa de métricas y tiempos de inferencia
+- [ ] Porcentaje de ocupación por frame y definición de la ROI para la demo
+- [ ] Demo sobre video con tracking
