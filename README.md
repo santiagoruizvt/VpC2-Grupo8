@@ -85,11 +85,15 @@ Lo que generan los notebooks **no se versiona** (debe estar en el `.gitignore`):
 4. Para entrenar en Colab, comprimir la carpeta de salida de modo que **dentro del zip quede `pklot_yolo/` en la raíz**:
 
    ```bash
-   cd datasets && zip -qr pklot_yolo.zip pklot_yolo -x "*.DS_Store" "*.cache"
+   uv run python -c "import shutil; shutil.make_archive('datasets/pklot_yolo', 'zip', 'datasets', 'pklot_yolo')"
    ```
 
-   En Windows se puede usar 7-Zip con la misma condición. Para que los resultados sean comparables entre integrantes,
-   **todos deben usar el mismo zip**.
+   Se ejecuta desde la raíz del repo y funciona igual en macOS y Windows (tarda unos minutos y genera ~1 GB).
+   En Windows **no usar `Compress-Archive`**: guarda las rutas con `\` y en Colab no se descomprimen como carpetas.
+   Antes de subirlo a Drive, conviene verificar que el zip no haya quedado vacío o cortado.
+   Para que los resultados sean comparables entre integrantes,
+   **todos deben usar el mismo zip**. El 03 imprime una huella de los splits (`DATASET_ID`) y la guarda en cada CSV de métricas:
+   con el 02 actual tiene que dar `e60503c5`. Si da otro valor, el zip se generó con una versión anterior del 02.
 
 ### 2. Entrenar y evaluar (`03_entrenamiento_yolo.ipynb`)
 
@@ -121,13 +125,15 @@ Para comparar modelos o estrategias entre sí conviene **no cambiar** `EPOCHS`, 
 **Resultados** (en Drive, `Mi unidad/vpc2/runs/`)
 
 - `<modelo>_<estrategia>/weights/best.pt` y `last.pt`, curvas y `results.csv`.
-- `metricas_<modelo>_<estrategia>.csv`: precision, recall, F1, mAP@0.5, mAP@0.5:0.95 y milisegundos de inferencia, global, por clase y por cámara.
+- `metricas_<modelo>_<estrategia>.csv`: precision, recall, F1, mAP@0.5, mAP@0.5:0.95 y milisegundos de inferencia, global, por clase y por cámara,
+  junto con el `dataset_id` del zip usado.
 
 **Si Colab se corta durante el entrenamiento**
 
 1. Reconectar y ejecutar en orden: configuración, sección 1 (monta Drive y descomprime el zip) y sección 2 (define `meta`).
 2. **No ejecutar la celda de entrenamiento original**: reentrena desde cero y pisa los resultados guardados en Drive.
-3. Ejecutar la celda de reanudación (`resume=True`) y luego continuar con las secciones 4 y 5.
+3. En la celda de reanudación poner `RESUME = True`, ejecutarla y luego continuar con las secciones 4 y 5.
+   Con `RESUME = False` (valor por defecto) la celda no hace nada, así que se puede usar "Ejecutar todo" sin riesgo.
 
 ## Hallazgos principales de la exploración
 
@@ -141,7 +147,8 @@ Para comparar modelos o estrategias entre sí conviene **no cambiar** `EPOCHS`, 
 
 - [x] EDA (01)
 - [x] Preparación de datos y estrategias de split (02)
-- [x] Baseline YOLO11m con `por_dia` (03)
+- [x] Baseline YOLO11m con `por_dia` (03), con el split actual (`DATASET_ID = e60503c5`): mAP@0.5:0.95 en test de 0,924
+  (PUCPR 0,855, UFPR04 0,971, UFPR05 0,979)
 - [ ] YOLO11m con `oficial` y con `por_camara_*`
 - [ ] Segunda arquitectura (RT-DETR o Faster R-CNN) con la misma configuración
 - [ ] Comparativa de métricas y tiempos de inferencia
